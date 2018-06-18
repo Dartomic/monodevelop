@@ -181,7 +181,7 @@ namespace MonoDevelop.CSharp.Refactoring
 					await Task.WhenAll (tasks);
 				} catch (OperationCanceledException) {
 				} catch (Exception ex) {
-					MonoDevelop.Refactoring.Counters.SetFailure (metadata);
+					metadata.SetFailure ();
 					if (monitor != null)
 						monitor.ReportError ("Error finding references", ex);
 					else
@@ -190,7 +190,7 @@ namespace MonoDevelop.CSharp.Refactoring
 					if (owningMonitor)
 						monitor.Dispose ();
 					if (monitor.CancellationToken.IsCancellationRequested)
-						MonoDevelop.Refactoring.Counters.SetUserCancel (metadata);
+						metadata.SetUserCancel ();
 					if (timer != null)
 						timer.Dispose ();
 				}
